@@ -1,32 +1,19 @@
-import React, { createContext, useState, useContext, useCallback } from 'react'
+import React, { useState, useCallback } from 'react'
+import { Provider, useSelector, useDispatch } from 'react-redux'
+import { configureStore } from '@reduxjs/toolkit'
+import titlesReducer, { TTitles, checkedComponent1, checkedComponent2 } from './titlesSlice'
 import './App.scss'
 
-type TTitles = {
-  component1: string,
-  component2: string
-}
-
-type TTitlesContext = {
-  titles: TTitles,
-  setTitles: React.Dispatch<React.SetStateAction<TTitles>>
-}
-
-const initialValue = {
-  component1: 'Component1(use Context)',
-  component2: 'Component2(use Context)',
-}
-
-const TitlesContext = createContext({} as TTitlesContext)
+const store = configureStore({ reducer: titlesReducer })
 
 const App = () => {
-  const [titles, setTitles] = useState(initialValue)
   console.log('rendering App')
 
   return (
     <div className="App" >
-      <TitlesContext.Provider value={{ titles, setTitles }}>
+      <Provider store={store}>
         <WrapperComponent />      
-      </TitlesContext.Provider>
+      </Provider>
     </div>
   )
 }
@@ -43,28 +30,28 @@ const WrapperComponent = React.memo(() => {
 })
 
 const Component1 = () => {
-  const { titles, setTitles } = useContext(TitlesContext)
+  const component1 = useSelector((state: TTitles) => state.component1)
+  const dispatch = useDispatch()
 
   console.log('rendering Component1')
 
   return (
-    <>
-      <div className="component1">
-        {titles.component1}
-        <button onClick={() => setTitles({ ...titles, component1: 'checked(use Context)' })}>Checked</button>
-      </div>
-    </>
+    <div className="component1">
+      {component1}
+      <button onClick={() => dispatch(checkedComponent1())}>Checked</button>
+    </div>
   )
 }
 
 const Component2 = () => {
-  const { titles, setTitles } = useContext(TitlesContext)
+  const component2 = useSelector((state: TTitles) => state.component2)
+  const dispatch = useDispatch()
 
   console.log('rendering Component2')
   return (
     <div className="component2">
-      {titles.component2}
-      <button onClick={() => setTitles({ ...titles, component2: 'checked(use Context)' })}>Checked</button>
+      {component2}
+      <button onClick={() => dispatch(checkedComponent2())}>Checked</button>
     </div>
   )
 }
