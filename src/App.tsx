@@ -12,8 +12,8 @@ type TTitlesContext = {
 }
 
 const initialValue = {
-  component1: 'LightGreen Component(use Context)',
-  component2: 'LightBlue Component(use Context)',
+  component1: 'Component1(use Context)',
+  component2: 'Component2(use Context)',
 }
 
 const TitlesContext = createContext({} as TTitlesContext)
@@ -37,7 +37,7 @@ const App = () => {
 const Component1 = () => {
   const { titles, setTitles } = useContext(TitlesContext)
 
-  console.log('rendering LightGreen Component')
+  console.log('rendering Component1')
 
   return (
     <>
@@ -52,7 +52,7 @@ const Component1 = () => {
 const Component2 = () => {
   const { titles, setTitles } = useContext(TitlesContext)
 
-  console.log('rendering LightBlue Component')
+  console.log('rendering Component2')
   return (
     <div className="component2">
       {titles.component2}
@@ -62,11 +62,11 @@ const Component2 = () => {
 }
 
 const Component3 = () => {
-  const [title, setTitle] = useState({ component3: 'LightYellow Component(use LocalState)'})
+  const [title, setTitle] = useState({ component3: 'Component3(use LocalState)'})
 
   const onClick = useCallback(() => setTitle({ component3: 'checked(use LocalState)' }), [setTitle])
 
-  console.log('rendering LightYellow Component')
+  console.log('rendering Component3')
   return (
     <div className="component3">
       {title.component3}
