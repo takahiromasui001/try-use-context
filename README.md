@@ -1,4 +1,17 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+useContext + useState におけるパフォーマンス上の懸念と、その解消法として(不本意ながら)Reduxを使っちゃう話
+https://qiita.com/jonakp/private/58c9c383473d02479ea7
+
+のサンプルコードです。
+
+## 記事のサンプルコードとブランチ名の対応
+記事のサンプル1, 2, 3のそれぞれに対応したブランチを作成しています。
+必要に応じて切り替えてください。
+
+|  サンプル  |  ブランチ名  |
+| ---- | ---- |
+|  サンプル1: useContext + useStateの利用  |  use_context  |
+|  サンプル2: useContext + useState & React.memoの利用  |  use_context_with_react_memo  |
+|  サンプル3: Reduxの利用  |  use_redux  |
 
 ## Available Scripts
 
