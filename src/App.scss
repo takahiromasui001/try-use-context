@@ -1,13 +1,13 @@
 .App {
   text-align: center;
   background-color: lightgray;
-  height: 700px;
+  height: 400px;
   width: 600px;
   padding-top: 20px;
 
   .wrapper {
     background-color: gray;
-    height: 650px;
+    height: 350px;
     width: 550px;
     margin: auto;
     padding-top: 20px;
@@ -18,19 +18,19 @@
   
     .component1 {
       background-color: lightgreen;
-      height: 200px;
+      height: 100px;
       width: 500px;
       margin: auto;
     }
     .component2 {
       background-color: lightblue;
-      height: 200px;
+      height: 100px;
       width: 500px;
       margin: auto;
     }
     .component3 {
       background-color: lightyellow;
-      height: 200px;
+      height: 100px;
       width: 500px;
       margin: auto;
     }  
