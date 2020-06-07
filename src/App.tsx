@@ -26,6 +26,7 @@ const App = () => {
     <TitlesContext.Provider value={{ titles, setTitles }}>
       
       <div className="App" >
+        <div className="app-title">App Component</div>
         <Component1 />
         <Component2 />
         <Component3 />
@@ -40,12 +41,10 @@ const Component1 = () => {
   console.log('rendering Component1')
 
   return (
-    <>
-      <div className="component1">
-        {titles.component1}
-        <button onClick={() => setTitles({ ...titles, component1: 'checked(use Context)' })}>Checked</button>
-      </div>
-    </>
+    <div className="component1">
+      {titles.component1}
+      <button onClick={() => setTitles({ ...titles, component1: 'checked(use Context)' })}>Checked</button>
+    </div>
   )
 }
 
