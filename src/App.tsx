@@ -1,14 +1,14 @@
 import React, { createContext, useState, useContext, useCallback } from 'react'
 import './App.scss'
 
-type TTitles = {
+type TTexts = {
   component1: string,
   component2: string
 }
 
-type TTitlesContext = {
-  titles: TTitles,
-  setTitles: React.Dispatch<React.SetStateAction<TTitles>>
+type TTextsContext = {
+  texts: TTexts,
+  setTexts: React.Dispatch<React.SetStateAction<TTexts>>
 }
 
 const initialValue = {
@@ -16,59 +16,59 @@ const initialValue = {
   component2: 'Component2(use Context)',
 }
 
-const TitlesContext = createContext({} as TTitlesContext)
+const TextsContext = createContext({} as TTextsContext)
 
 const App = () => {
-  const [titles, setTitles] = useState(initialValue)
+  const [texts, setTexts] = useState(initialValue)
   console.log('rendering App')
 
   return (
-    <TitlesContext.Provider value={{ titles, setTitles }}>
+    <TextsContext.Provider value={{ texts, setTexts }}>
       
       <div className="App" >
-        <div className="app-title">App Component</div>
+        <div className="app-text">App Component</div>
         <Component1 />
         <Component2 />
         <Component3 />
       </div>
-    </TitlesContext.Provider>
+    </TextsContext.Provider>
   )
 }
 
 const Component1 = () => {
-  const { titles, setTitles } = useContext(TitlesContext)
+  const { texts, setTexts } = useContext(TextsContext)
 
   console.log('rendering Component1')
 
   return (
     <div className="component1">
-      {titles.component1}
-      <button onClick={() => setTitles({ ...titles, component1: 'checked(use Context)' })}>Checked</button>
+      {texts.component1}
+      <button onClick={() => setTexts({ ...texts, component1: 'checked(use Context)' })}>Checked</button>
     </div>
   )
 }
 
 const Component2 = () => {
-  const { titles, setTitles } = useContext(TitlesContext)
+  const { texts, setTexts } = useContext(TextsContext)
 
   console.log('rendering Component2')
   return (
     <div className="component2">
-      {titles.component2}
-      <button onClick={() => setTitles({ ...titles, component2: 'checked(use Context)' })}>Checked</button>
+      {texts.component2}
+      <button onClick={() => setTexts({ ...texts, component2: 'checked(use Context)' })}>Checked</button>
     </div>
   )
 }
 
 const Component3 = () => {
-  const [title, setTitle] = useState({ component3: 'Component3(use LocalState)'})
+  const [text, setText] = useState({ component3: 'Component3(use LocalState)'})
 
-  const onClick = useCallback(() => setTitle({ component3: 'checked(use LocalState)' }), [setTitle])
+  const onClick = useCallback(() => setText({ component3: 'checked(use LocalState)' }), [setText])
 
   console.log('rendering Component3')
   return (
     <div className="component3">
-      {title.component3}
+      {text.component3}
       <button onClick={onClick}>Checked</button>
     </div>
   )
