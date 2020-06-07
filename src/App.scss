@@ -1,25 +1,38 @@
 .App {
   text-align: center;
-  background-color: lightgray;
+  background-color: gray;
   height: 700px;
   width: 600px;
+  padding-top: 20px;
 
-  .component1 {
-    background-color: lightgreen;
-    height: 200px;
-    width: 500px;
+  .wrapper {
+    background-color: lightgray;
+    height: 650px;
+    width: 550px;
     margin: auto;
-  }
-  .component2 {
-    background-color: lightblue;
-    height: 200px;
-    width: 500px;
-    margin: auto;
-  }
-  .component3 {
-    background-color: lightyellow;
-    height: 200px;
-    width: 500px;
-    margin: auto;
+    padding-top: 20px;
+
+    .wrapper-title {
+      margin-bottom: 10px;
+    }
+  
+    .component1 {
+      background-color: lightgreen;
+      height: 200px;
+      width: 500px;
+      margin: auto;
+    }
+    .component2 {
+      background-color: lightblue;
+      height: 200px;
+      width: 500px;
+      margin: auto;
+    }
+    .component3 {
+      background-color: lightyellow;
+      height: 200px;
+      width: 500px;
+      margin: auto;
+    }  
   }
 }
