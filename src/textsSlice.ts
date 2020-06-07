@@ -1,26 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-export type TTitles = {
+export type TTexts = {
   component1: string,
   component2: string
 }
 
-const titlesSlice = createSlice({
-  name: 'titles',
+const textsSlice = createSlice({
+  name: 'texts',
   initialState: {
     component1: 'Component1(use Context)',
     component2: 'Component2(use Context)',
   },
   reducers: {
-    checkedComponent1(state: TTitles) {
+    checkedComponent1(state: TTexts) {
       state.component1 = 'checked(use Redux)'
     },
-    checkedComponent2(state: TTitles) {
+    checkedComponent2(state: TTexts) {
       state.component2 = 'checked(use Redux)'
     },
   }
 })
 
-export const { checkedComponent1, checkedComponent2 } = titlesSlice.actions
+export const { checkedComponent1, checkedComponent2 } = textsSlice.actions
 
-export default titlesSlice.reducer
+export default textsSlice.reducer

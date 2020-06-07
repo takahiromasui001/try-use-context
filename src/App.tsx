@@ -1,10 +1,10 @@
 import React, { useState, useCallback } from 'react'
 import { Provider, useSelector, useDispatch } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit'
-import titlesReducer, { TTitles, checkedComponent1, checkedComponent2 } from './titlesSlice'
+import textsReducer, { TTexts, checkedComponent1, checkedComponent2 } from './textsSlice'
 import './App.scss'
 
-const store = configureStore({ reducer: titlesReducer })
+const store = configureStore({ reducer: textsReducer })
 
 const App = () => {
   console.log('rendering App')
@@ -12,6 +12,7 @@ const App = () => {
   return (
     <div className="App" >
       <Provider store={store}>
+        <div>App Component</div>
         <WrapperComponent />      
       </Provider>
     </div>
@@ -21,7 +22,7 @@ const App = () => {
 const WrapperComponent = React.memo(() => {
   return (
       <div className="wrapper">
-        <div className="wrapper-title">WrapperComponent using React.memo</div>
+        <div className="wrapper-text">Wrapper Component using React.memo</div>
         <Component1 />
         <Component2 />
         <Component3 />
@@ -30,7 +31,7 @@ const WrapperComponent = React.memo(() => {
 })
 
 const Component1 = () => {
-  const component1 = useSelector((state: TTitles) => state.component1)
+  const component1 = useSelector((state: TTexts) => state.component1)
   const dispatch = useDispatch()
 
   console.log('rendering Component1')
@@ -44,7 +45,7 @@ const Component1 = () => {
 }
 
 const Component2 = () => {
-  const component2 = useSelector((state: TTitles) => state.component2)
+  const component2 = useSelector((state: TTexts) => state.component2)
   const dispatch = useDispatch()
 
   console.log('rendering Component2')
@@ -57,14 +58,14 @@ const Component2 = () => {
 }
 
 const Component3 = () => {
-  const [title, setTitle] = useState({ component3: 'Component3(use LocalState)'})
+  const [text, setText] = useState({ component3: 'Component3(use LocalState)'})
 
-  const onClick = useCallback(() => setTitle({ component3: 'checked(use LocalState)' }), [setTitle])
+  const onClick = useCallback(() => setText({ component3: 'checked(use LocalState)' }), [setText])
 
   console.log('rendering Component3')
   return (
     <div className="component3">
-      {title.component3}
+      {text.component3}
       <button onClick={onClick}>Checked</button>
     </div>
   )
