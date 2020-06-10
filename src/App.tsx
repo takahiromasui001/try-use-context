@@ -19,18 +19,26 @@ const initialValue = {
 const TextsContext = createContext({} as TTextsContext)
 
 const App = () => {
-  const [texts, setTexts] = useState(initialValue)
   console.log('rendering App')
 
   return (
+    <div className="App" >
+      <div className="app-text">App Component</div>
+      <AppProvider>
+          <Component1 />
+          <Component2 />
+          <Component3 />
+      </AppProvider>
+    </div>
+  )
+}
+
+const AppProvider = (props: { children: React.ReactNode }) => {
+  const [texts, setTexts] = useState(initialValue)
+
+  return (
     <TextsContext.Provider value={{ texts, setTexts }}>
-      
-      <div className="App" >
-        <div className="app-text">App Component</div>
-        <Component1 />
-        <Component2 />
-        <Component3 />
-      </div>
+      {props.children}
     </TextsContext.Provider>
   )
 }
