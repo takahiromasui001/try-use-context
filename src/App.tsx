@@ -1,22 +1,13 @@
 import React, { createContext, useState, useContext, useCallback } from 'react'
 import './App.scss'
 
-type TTexts = {
-  component1: string
-  component2: string
-}
-
 type TTextsContext = {
-  texts: TTexts
-  setTexts: React.Dispatch<React.SetStateAction<TTexts>>
+  text: string
+  setText: React.Dispatch<React.SetStateAction<string>>
 }
 
-const initialValue = {
-  component1: 'Component1(use Context)',
-  component2: 'Component2(use Context)'
-}
-
-const TextsContext = createContext({} as TTextsContext)
+const TextContext1 = createContext({} as TTextsContext)
+const TextContext2 = createContext({} as TTextsContext)
 
 const App = () => {
   console.log('rendering App')
@@ -34,48 +25,39 @@ const App = () => {
 }
 
 const AppProvider = (props: { children: React.ReactNode }) => {
-  const [texts, setTexts] = useState(initialValue)
+  const [text1, setText1] = useState('Component1(use Context)')
+  const [text2, setText2] = useState('Component2(use Context)')
 
   return (
-    <TextsContext.Provider value={{ texts, setTexts }}>
-      {props.children}
-    </TextsContext.Provider>
+    <TextContext1.Provider value={{ text: text1, setText: setText1 }}>
+      <TextContext2.Provider value={{ text: text2, setText: setText2 }}>
+        {props.children}
+      </TextContext2.Provider>
+    </TextContext1.Provider>
   )
 }
 
 const Component1 = () => {
-  const { texts, setTexts } = useContext(TextsContext)
+  const { text, setText } = useContext(TextContext1)
 
   console.log('rendering Component1')
 
   return (
     <div className="component1">
-      {texts.component1}
-      <button
-        onClick={() =>
-          setTexts({ ...texts, component1: 'checked(use Context)' })
-        }
-      >
-        Checked
-      </button>
+      {text}
+      <button onClick={() => setText('checked(use Context)')}>Checked</button>
     </div>
   )
 }
 
 const Component2 = () => {
-  const { texts, setTexts } = useContext(TextsContext)
+  const { text, setText } = useContext(TextContext2)
 
   console.log('rendering Component2')
   return (
     <div className="component2">
-      {texts.component2}
-      <button
-        onClick={() =>
-          setTexts({ ...texts, component2: 'checked(use Context)' })
-        }
-      >
-        Checked
-      </button>
+      {text}
+      <button onClick={() => setText('checked(use Context)')}>Checked</button>
     </div>
   )
 }
