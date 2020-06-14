@@ -1,13 +1,18 @@
 import React, { createContext, useState, useContext, useCallback } from 'react'
 import './App.scss'
 
-type TTextsContext = {
-  text: string
-  setText: React.Dispatch<React.SetStateAction<string>>
-}
-
-const TextContext1 = createContext({} as TTextsContext)
-const TextContext2 = createContext({} as TTextsContext)
+const TextContext1 = createContext(
+  {} as {
+    text1: string
+    setText1: React.Dispatch<React.SetStateAction<string>>
+  }
+)
+const TextContext2 = createContext(
+  {} as {
+    text2: string
+    setText2: React.Dispatch<React.SetStateAction<string>>
+  }
+)
 
 const App = () => {
   console.log('rendering App')
@@ -24,40 +29,55 @@ const App = () => {
   )
 }
 
-const AppProvider = (props: { children: React.ReactNode }) => {
+const TextProvider1 = (props: { children: React.ReactNode }) => {
   const [text1, setText1] = useState('Component1(use Context)')
-  const [text2, setText2] = useState('Component2(use Context)')
 
   return (
-    <TextContext1.Provider value={{ text: text1, setText: setText1 }}>
-      <TextContext2.Provider value={{ text: text2, setText: setText2 }}>
-        {props.children}
-      </TextContext2.Provider>
+    <TextContext1.Provider value={{ text1, setText1 }}>
+      {props.children}
     </TextContext1.Provider>
   )
 }
 
+const TextProvider2 = (props: { children: React.ReactNode }) => {
+  const [text2, setText2] = useState('Component1(use Context)')
+
+  return (
+    <TextContext2.Provider value={{ text2, setText2 }}>
+      {props.children}
+    </TextContext2.Provider>
+  )
+}
+
+const AppProvider = (props: { children: React.ReactNode }) => {
+  return (
+    <TextProvider1>
+      <TextProvider2>{props.children}</TextProvider2>
+    </TextProvider1>
+  )
+}
+
 const Component1 = () => {
-  const { text, setText } = useContext(TextContext1)
+  const { text1, setText1 } = useContext(TextContext1)
 
   console.log('rendering Component1')
 
   return (
     <div className="component1">
-      {text}
-      <button onClick={() => setText('checked(use Context)')}>Checked</button>
+      {text1}
+      <button onClick={() => setText1('checked(use Context)')}>Checked</button>
     </div>
   )
 }
 
 const Component2 = () => {
-  const { text, setText } = useContext(TextContext2)
+  const { text2, setText2 } = useContext(TextContext2)
 
   console.log('rendering Component2')
   return (
     <div className="component2">
-      {text}
-      <button onClick={() => setText('checked(use Context)')}>Checked</button>
+      {text2}
+      <button onClick={() => setText2('checked(use Context)')}>Checked</button>
     </div>
   )
 }
